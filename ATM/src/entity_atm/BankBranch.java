@@ -2,8 +2,8 @@ package entity_atm;
 
 public class BankBranch {
 	
-	private final int branchNumber;
-	private final String branchAddress;
+	private int branchNumber;
+	private String branchAddress;
 	
 	public BankBranch(int bN, String bA) {
 		this.branchNumber = bN;

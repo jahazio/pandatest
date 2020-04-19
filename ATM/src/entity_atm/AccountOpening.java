@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public class AccountOpening {
 
-	private final int customerID;
-	private final int accountNumber;
-	private final LocalDateTime dateTimeOpened;
+	private int customerID;
+	private int accountNumber;
+	private LocalDateTime dateTimeOpened;
 	
 	public AccountOpening(int cID, int aN, LocalDateTime dTO) {
 		this.customerID = cID;
@@ -22,17 +22,13 @@ public class AccountOpening {
 		return accountNumber;
 	}
 
-	/*
-	 * This function returns the date the account was opened.
-	 * In other words, function is a getter for dateTimeOpened.
-	 */
 	public LocalDateTime getDateTimeOpened() {
 		return dateTimeOpened;
 	}
 	
 	@Override
 	public String toString() {
-		String str = "Account Open Date: " + this.dateTimeOpened
+		String str = "Account Opening Date: " + this.dateTimeOpened
 				   + "\nAccount Number: " + this.accountNumber 
 				   + "\nCustomer ID: " + this.customerID + "\n";
 		return str;

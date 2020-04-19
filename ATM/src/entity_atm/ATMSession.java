@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class ATMSession {
 
-	private final int sessionID;
-	private final LocalDateTime sessionStartTime;
-	private final LocalDateTime sessionEndTime;
+	private int sessionID;
+	private LocalDateTime sessionStartTime;
+	private LocalDateTime sessionEndTime;
 	private boolean sessionActive;
-	private final int machineID;
-	private final int cardNumber;
+	private int machineID;
+	private int cardNumber;
 	
 	public ATMSession(int sID, LocalDateTime sST, LocalDateTime sET,
 						boolean sA, int mID, int cN) {

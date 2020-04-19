@@ -2,12 +2,12 @@ package entity_atm;
 
 public class Account {
 
-	private final int accountNumber;
-	private final boolean accountStatus;
-	private final double accountBal;
-	private final int accountType;
-	private final double interestRate;
-	private final double minReqBalance;
+	private int accountNumber;
+	private boolean accountStatus;
+	private double accountBal;
+	private int accountType;
+	private double interestRate;
+	private double minReqBalance;
 	
 	public Account(int aN, boolean aS, double aB, int aT,
 					double iR, double mRB) {
@@ -48,14 +48,14 @@ public class Account {
 		String str = new String();
 		str = "Account Number: " + this.accountNumber
 		    + "\nAccount Status: " + this.accountStatus
-		    + "\nAccount Balance: " + this.accountBal
+		    + "\nAccount Balance: $" + this.accountBal
 		    + "\nAccount Type: " + this.accountType;
 		
 		if(this.accountType  == 0) {
-			str += "\nInterest Rate: " + this.interestRate + "\n";
+			str += "\nInterest Rate: " + this.interestRate + "%" + "\n";
 		}
 		else {
-			str += "\nMinimum Required Balance: " + this.minReqBalance + "\n";
+			str += "\nMinimum Required Balance: $" + this.minReqBalance + "\n";
 		}
 		return str;
 	}

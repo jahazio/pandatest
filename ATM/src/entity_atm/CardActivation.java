@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public class CardActivation {
 	
-	private final int cardNumber;
-	private final int accountNumber;
-	private final LocalDateTime dateTimeActivated;
+	private int cardNumber;
+	private int accountNumber;
+	private LocalDateTime dateTimeActivated;
 	
 	public CardActivation(int cN, int aN, LocalDateTime dTA) {
 		this.cardNumber = cN;

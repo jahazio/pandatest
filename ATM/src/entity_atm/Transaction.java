@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 
 public class Transaction {
 
-	private final int transactionID;
-	private final LocalDateTime timeDateOfTrans;
-	private final int transactionType;
-	private final double amount;
-	private final int targetAccNumber;
-	private final int sessionID;
-	private final int accountNumber; //accountNumber is the Source Account Number
+	private int transactionID;
+	private LocalDateTime timeDateOfTrans;
+	private int transactionType;
+	private double amount;
+	private int targetAccNumber;
+	private int sessionID;
+	private int accountNumber; //accountNumber is the Source Account Number
 	
 	public Transaction(int tID, LocalDateTime tDOT, int tT, double a,
 						int tAN, int sID, int aN) {

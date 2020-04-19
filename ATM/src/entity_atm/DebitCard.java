@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class DebitCard {
 
-	private final int cardNumber;
-	private final String cardHolderName;
-	private final LocalDateTime cardExpDate;
-	private final int pinNumber;
-	private final int customerID;
-	private final int branchNumber;
+	private int cardNumber;
+	private String cardHolderName;
+	private LocalDateTime cardExpDate;
+	private int pinNumber;
+	private int customerID;
+	private int branchNumber;
 	
 	public DebitCard(int cN, String cHN, LocalDateTime cED, int pN,
 						int cID, int bN) {

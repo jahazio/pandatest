@@ -4,12 +4,12 @@ import java.time.LocalDateTime;
 
 public class Client {
 	
-	private final int customerID;
-	private final String customerName;
-	private final String customerAddress;
-	private final String customerTel;
-	private final LocalDateTime customerDob;
-	private final int branchNumber;
+	private int customerID;
+	private String customerName;
+	private String customerAddress;
+	private String customerTel;
+	private LocalDateTime customerDob;
+	private int branchNumber;
 	
 	public Client(int cID, String cN, String cA, String cT, 
 					LocalDateTime cD, int bN) {

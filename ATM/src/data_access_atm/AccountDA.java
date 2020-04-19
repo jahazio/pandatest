@@ -20,8 +20,8 @@ public class AccountDA {
 	
 	private void generateStatements() throws SQLException {
 		
-		 psGetAccountInfo = db.getDatabase().prepareStatement("SELECT `accountNumber`, `accountStatus` , "
-		 				  										+ "`accountBal` , `accountType`, `interestRate`, `minReqBalance` "
+		 psGetAccountInfo = db.getDatabase().prepareStatement("SELECT `accountNumber`, `accountStatus`, "
+		 				  										+ "`accountBal`, `accountType`, `interestRate`, `minReqBalance` "
 		 				  										+ "FROM Account WHERE `accountNumber` = ? LIMIT 1;");
 		 psInsertSavings = db.getDatabase().prepareStatement("INSERT INTO `Account` (`accountStatus`, `accountBal`, `accountType`, `interestRate`)"
 		 														+ "VALUES(1, 0.0, 0, 0.5);");

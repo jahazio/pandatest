@@ -12,6 +12,7 @@ public class DebitCardDA {
 		int primaryKey = 0;
 		ResultSet set;
 		
+		/*
 		while(exists) {
 			try {	
 				primaryKey = ThreadLocalRandom.current().nextInt(0, 1048576);
@@ -27,5 +28,7 @@ public class DebitCardDA {
 			}
 		}
 		return primaryKey;
+		*/
+		return 0;
 	}
 }

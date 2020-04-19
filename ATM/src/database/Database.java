@@ -7,10 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.sqlite.SQLiteConfig;
+
+import data_access_atm.ATMDA;
 import data_access_atm.AccountDA;
+import data_access_atm.BankBranchDA;
 
 public class Database {
 
@@ -19,13 +22,16 @@ public class Database {
 	
 	public Database() {
 		
+		SQLiteConfig config = new SQLiteConfig();
+        config.enforceForeignKeys(true);
+        
 		String connectionPath = "jdbc:sqlite:" + System.getProperty("user.home") 
 							  + File.separator + "ATMSubsystem.db";  
 		this.lock = new ReentrantLock();
 		
 		try
 		{
-		    connection = DriverManager.getConnection(connectionPath);
+		    connection = DriverManager.getConnection(connectionPath, config.toProperties());
 		    System.out.println("Opened Local Database");
 		    connection.setAutoCommit(false);
 		}
@@ -74,26 +80,29 @@ public class Database {
 	private static void generateTablesAndTriggers(Statement stmt) throws SQLException {
 		//ATM Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `ATM` (" + 
-							"  `machineID` INT NOT NULL," + 
+							"  `machineID` INTEGER NOT NULL," + 
 							"  `machineAddress` VARCHAR(45) NULL," + 
-							"  `currentFundsAvail` DOUBLE NOT NULL," + 
-							"  `sessionTimeOut` INT NOT NULL," + 
+							"  `sessionTimeOut` INTEGER NOT NULL," + 
 							"  `sessionActive` TINYINT NOT NULL," + 
-							"  `minCashAllowed` DOUBLE NOT NULL," + 
-							"  `maxCashCapacity` DOUBLE NOT NULL," + 
-							"  `maxPinEntryAttempts` INT NOT NULL," + 
-							"  `branchNumber` INT NOT NULL," + 
+							"  `maxPinEntryAttempts` INTEGER NOT NULL," + 
+							"  `withdrawalBillsRemaining` INTEGER NOT NULL," + 
+							"  `depositBillCount` INTEGER NOT NULL," + 
+							"  `minBillThreshold` INTEGER NOT NULL," + 
+							"  `maxBillThreshold` INTEGER NOT NULL," + 
+							"  `maxWithdrawalCapacity` INTEGER NOT NULL," + 
+							"  `maxDepositCapacity` INTEGER NOT NULL," + 
+							"  `branchNumber` INTEGER NOT NULL," + 
 							"  PRIMARY KEY (`machineID`)," + 
 							"  CONSTRAINT `ATM_BankBranch`" + 
-							"  FOREIGN KEY (`branchNumber`)" + 
-							"  REFERENCES `BankBranch` (`branchNumber`)" + 
-							"  ON DELETE RESTRICT" + 
-							"  ON UPDATE CASCADE)");
+							"    FOREIGN KEY (`branchNumber`)" + 
+							"    REFERENCES `BankBranch` (`branchNumber`)" + 
+							"    ON DELETE RESTRICT" + 
+							"    ON UPDATE CASCADE)");
 
 		//AccountOpening Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `AccountOpening` (" + 
-							"  `customerID` INT NOT NULL," + 
-							"  `accountNumber` INT NOT NULL," + 
+							"  `customerID` INTEGER NOT NULL," + 
+							"  `accountNumber` INTEGER NOT NULL," + 
 							"  `dateTimeOpening` DATETIME NOT NULL," + 
 							"  PRIMARY KEY (`customerID`, `accountNumber`)," +  
 							"  CONSTRAINT `AccountOpening_Client`" + 
@@ -112,19 +121,19 @@ public class Database {
 							"  `accountNumber` INTEGER NOT NULL," + 
 							"  `accountStatus` TINYINT NULL," + 
 							"  `accountBal` DOUBLE NOT NULL," + 
-							"  `accountType` INT NOT NULL," + 
+							"  `accountType` INTEGER NOT NULL," + 
 							"  `interestRate` DOUBLE NULL," + 
 							"  `minReqBalance` DOUBLE NULL," + 
 							"  PRIMARY KEY (`accountNumber`));");
 		
 		//ATMSession Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `ATMSession` (" + 
-							"  `sessionID` INT NOT NULL," + 
+							"  `sessionID` INTEGER NOT NULL," + 
 							"  `sessionStartTime` DATETIME NULL," + 
 							"  `sessionEndTime` DATETIME NULL," + 
 							"  `sessionActive` TINYINT NOT NULL," + 
-							"  `machineID` INT NOT NULL," + 
-							"  `cardNumber` INT NULL," + 
+							"  `machineID` INTEGER NOT NULL," + 
+							"  `cardNumber` INTEGER NULL," + 
 							"  PRIMARY KEY (`sessionID`)," + 
 							"  CONSTRAINT `ATMSession_ATM`" + 
 							"    FOREIGN KEY (`machineID`)" + 
@@ -139,14 +148,14 @@ public class Database {
 		
 		//BankBranch Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `BankBranch` (" + 
-							"  `branchNumber` INT NOT NULL," + 
+							"  `branchNumber` INTEGER NOT NULL," + 
 							"  `branchAddress` VARCHAR(45) NOT NULL," + 
 							"  PRIMARY KEY (`branchNumber`));");
 		
 		//CardActivation Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `CardActivation` (" + 
-							"  `cardNumber` INT NULL," + 
-							"  `accountNumber` INT NULL," + 
+							"  `cardNumber` INTEGER NULL," + 
+							"  `accountNumber` INTEGER NULL," + 
 							"  `dateTimeActivated` DATETIME NOT NULL," + 
 							"  PRIMARY KEY (`cardNumber`, `accountNumber`)," + 
 							"  CONSTRAINT `CardActivation_DebitCard`" + 
@@ -162,12 +171,12 @@ public class Database {
 		
 		//Client Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `Client` (" + 
-							"  `customerID` INT NOT NULL," + 
+							"  `customerID` INTEGER NOT NULL," + 
 							"  `customerName` VARCHAR(45) NOT NULL," + 
 							"  `customerAddress` VARCHAR(45) NOT NULL," + 
 							"  `customerTel` VARCHAR(45) NOT NULL," + 
 							"  `customerDob` DATETIME NOT NULL," + 
-							"  `branchNumber` INT NOT NULL," + 
+							"  `branchNumber` INTEGER NOT NULL," + 
 							"  PRIMARY KEY (`customerID`)," + 
 							"  CONSTRAINT `Client_BankBranch`" + 
 							"    FOREIGN KEY (`branchNumber`)" + 
@@ -177,12 +186,12 @@ public class Database {
 		
 		//DebitCard Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `DebitCard` (" + 
-							"  `cardNumber` INT NOT NULL," + 
+							"  `cardNumber` INTEGER NOT NULL," + 
 							"  `cardHolderName` VARCHAR(45) NOT NULL," + 
 							"  `cardExpDate` DATETIME NOT NULL," + 
-							"  `pinNumber` INT NOT NULL," + 
-							"  `customerID` INT NOT NULL," + 
-							"  `branchNumber` INT NOT NULL," + 
+							"  `pinNumber` INTEGER NOT NULL," + 
+							"  `customerID` INTEGER NOT NULL," + 
+							"  `branchNumber` INTEGER NOT NULL," + 
 							"  PRIMARY KEY (`cardNumber`)," + 
 							"  CONSTRAINT `DebitCard_Client`" + 
 							"    FOREIGN KEY (`customerID`)" + 
@@ -197,13 +206,13 @@ public class Database {
 		
 		//Transaction Table Generation
 		stmt.executeUpdate( "CREATE TABLE IF NOT EXISTS `Transaction` (" + 
-							"  `transactionID` INT NOT NULL," + 
+							"  `transactionID` INTEGER NOT NULL," + 
 							"  `timeDateOfTrans` DATETIME NOT NULL," + 
-							"  `transactionType` INT NOT NULL," + 
+							"  `transactionType` INTEGER NOT NULL," + 
 							"  `amount` DOUBLE NOT NULL," + 
-							"  `targetAccNumber` INT NULL," + 
-							"  `sessionID` INT NOT NULL," + 
-							"  `accountNumber` INT NOT NULL," + 
+							"  `targetAccNumber` INTEGER NULL," + 
+							"  `sessionID` INTEGER NOT NULL," + 
+							"  `accountNumber` INTEGER NOT NULL," + 
 							"  PRIMARY KEY (`transactionID`)," + 
 							"  CONSTRAINT `Transaction_ATMSession`" + 
 							"    FOREIGN KEY (`sessionID`)" + 
@@ -271,10 +280,25 @@ public class Database {
 		//Initialize Database
 		Database testDB = new Database();
 		
+		//Testing BankBranch Data Access/Entity
+		BankBranchDA bankBranchTestDA = new BankBranchDA(testDB);
+		System.out.println("Creating Bank Branch... ");
+		int bankBranch = bankBranchTestDA.insertBankBranch("3801 W Temple Ave, Pomona, CA 91768");
+		System.out.println("Bank Branch Info: " + bankBranchTestDA.getBankBranchInfo(bankBranch));
+		
+		//Testing ATM Data Access/Entity
+		ATMDA atmTestDA = new ATMDA(testDB);
+		System.out.println("Creating ATM... ");
+		int atm_one = atmTestDA.insertATM("3801 W Temple Ave, Pomona, CA 91768 - Bldg. 9 West Entrance", bankBranch);
+		System.out.println("ATM Info: " + atmTestDA.getATMInfo(atm_one));
+		
 		//Testing Account Data Access/Entity
 		AccountDA accountTestDA = new AccountDA(testDB);
-		System.out.println("Checking: " + accountTestDA.insertCheckingAcc());
-		System.out.println("Savings: " + accountTestDA.insertSavingsAcc());
-		System.out.println("Account Info: " + accountTestDA.getAccountInfo(5));
+		System.out.println("Creating Checking... ");
+		int checking_acc = accountTestDA.insertCheckingAcc();
+		System.out.println("Checking Info: " + accountTestDA.getAccountInfo(checking_acc));
+		System.out.println("Creating Savings... ");
+		int savings_acc = accountTestDA.insertSavingsAcc();
+		System.out.println("Savings Info: " + accountTestDA.getAccountInfo(savings_acc));
 	}
 }//end Database
