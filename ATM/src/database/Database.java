@@ -11,10 +11,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.sqlite.SQLiteConfig;
 
-import data_access_atm.ATMDA;
-import data_access_atm.AccountDA;
-import data_access_atm.BankBranchDA;
-
 public class Database {
 
 	private Connection connection;

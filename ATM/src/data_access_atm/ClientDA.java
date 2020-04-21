@@ -73,6 +73,5 @@ public class ClientDA {
 		db.unlock();
 		
 		return primaryKey;
-    }//end insertClient
-    
+    }//end insertClient  
 }//end ClientDA

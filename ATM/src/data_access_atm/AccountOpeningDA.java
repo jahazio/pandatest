@@ -50,10 +50,10 @@ public class AccountOpeningDA {
 		db.lock();
 		
 		try {
-			psGetAccountOpeningInfo.setInt(1, customerID);
-			psGetAccountOpeningInfo.setInt(2, accountNumber);
-			db.executeStatement(psGetAccountOpeningInfo, false);
-			set = psGetAccountOpeningInfo.getGeneratedKeys();
+			psInsertAccountOpening.setInt(1, customerID);
+			psInsertAccountOpening.setInt(2, accountNumber);
+			db.executeStatement(psInsertAccountOpening, false);
+			set = psInsertAccountOpening.getGeneratedKeys();
 			if(set.next()) {
 				primaryKey = set.getInt(1);
 			}
@@ -69,5 +69,4 @@ public class AccountOpeningDA {
 		db.unlock();
 		return primaryKey;
 	}//end insertAccountOpenning
-	
 }//end AccountOpeningDA
