@@ -72,7 +72,7 @@ public class AccountDA {
 		}
 		db.unlock();
 		return primaryKey;
-	}//end insertCheckingAcc	
+	}//end insertCheckingAcc
 	
 	public int insertSavingsAcc() {
 		

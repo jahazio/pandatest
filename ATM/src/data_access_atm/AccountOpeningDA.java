@@ -11,6 +11,7 @@ public class AccountOpeningDA {
 	 
 	private Database db;
 	private PreparedStatement psGetAccountOpeningInfo;
+	private PreparedStatement psInsertAccountOpening;
 	    
     public AccountOpeningDA(Database database) throws SQLException {
         this.db = database;
@@ -21,7 +22,9 @@ public class AccountOpeningDA {
         
     	psGetAccountOpeningInfo = db.getDatabase().prepareStatement("SELECT `customerID`, `accountNumber`,"
     							+ " `dateTimeOpening` FROM AccountOpening WHERE `customerID` = ? AND `accountNumber` = ? LIMIT 1;");
+    	psInsertAccountOpening = db.getDatabase().prepareStatement("INSERT INTO `AccountOpening` (`customerID`, `accountNumber`, `dateTimeOpening`) VALUES (?, ?, DateTime('now'));");
     }
+    
 	//There are two foreign keys functioning as composite key (Association Table)
 	public AccountOpening getAccountOpeningInfo(int customerID, int accountNumber) {
 	    
@@ -40,4 +43,31 @@ public class AccountOpeningDA {
 	    }
 	    return acc;
 	}//end getAccountOpeningInfo
+	
+	public int insertAccountOpening(int customerID, int accountNumber) {
+		ResultSet set;
+		int primaryKey = 0;
+		db.lock();
+		
+		try {
+			psGetAccountOpeningInfo.setInt(1, customerID);
+			psGetAccountOpeningInfo.setInt(2, accountNumber);
+			db.executeStatement(psGetAccountOpeningInfo, false);
+			set = psGetAccountOpeningInfo.getGeneratedKeys();
+			if(set.next()) {
+				primaryKey = set.getInt(1);
+			}
+			else {
+				System.out.println("ERROR: Failed to Retrieve Primary Key.");
+			}
+			set.close();
+		}
+		catch(SQLException e)
+		{
+			System.out.println(e);
+		}
+		db.unlock();
+		return primaryKey;
+	}//end insertAccountOpenning
+	
 }//end AccountOpeningDA
