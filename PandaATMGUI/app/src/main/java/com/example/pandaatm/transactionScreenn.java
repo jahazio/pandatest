@@ -4,11 +4,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class loginScreen extends AppCompatActivity {
+public class transactionScreenn extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_atm_login);
+        setContentView(R.layout.activity_transaction_screenn);
     }
+
 }
