@@ -41,7 +41,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/backToMapButton2"
+        android:id="@+id/backToMapButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="136dp"
@@ -52,18 +52,18 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/loginButton2"
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:layout_marginEnd="3dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="64dp"
         android:background="#33CC33"
         android:password="false"
         android:phoneNumber="false"
         android:text="Login"
         android:textColor="#011111"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/clearButton"
+        app:layout_constraintStart_toEndOf="@+id/clearButton3"
         app:layout_constraintTop_toBottomOf="@+id/pinText" />
 
     <EditText
@@ -91,14 +91,13 @@
         app:layout_constraintTop_toBottomOf="@+id/cardNumberText" />
 
     <Button
-        android:id="@+id/clearButton"
+        android:id="@+id/clearButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
         android:background="#B12525"
         android:text="Clear"
-        app:layout_constraintBaseline_toBaselineOf="@+id/loginButton2"
-        app:layout_constraintEnd_toStartOf="@+id/loginButton2"
+        app:layout_constraintBaseline_toBaselineOf="@+id/loginButton"
+        app:layout_constraintEnd_toStartOf="@+id/loginButton"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
