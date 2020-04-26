@@ -14,8 +14,8 @@
             android:label="@string/title_activity_balance_screen"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".splashScreen"
-            android:label="@string/title_activity_splash_screen"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".outsideTransfer"
@@ -41,14 +41,11 @@
             android:name=".mainScreen"
             android:label="@string/title_activity_main_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".loginScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".loginScreen"
+            android:label="@string/title_activity_atm_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".splashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
