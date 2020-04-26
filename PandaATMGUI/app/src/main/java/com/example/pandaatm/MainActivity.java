@@ -2,12 +2,17 @@ package com.example.pandaatm;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 4000;
@@ -18,15 +23,20 @@ public class MainActivity extends AppCompatActivity {
         //transition from splash screen to main screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent homeIntent = new Intent(MainActivity.this, mainScreen.class);
+                startActivity(homeIntent);
+                finish();
+            }
+        },SPLASH_TIME_OUT);
 
 
         //gets current time and date
-
-        /*TextView datetime = findViewById(R.id.dateTxt);
+        TextView datetime = findViewById(R.id.dateTxt);
         Date timenow = Calendar.getInstance().getTime();
         datetime.setText(timenow.toString());
-        */
-
 
 
         //if ATM on map is clicked, goes to login screen
