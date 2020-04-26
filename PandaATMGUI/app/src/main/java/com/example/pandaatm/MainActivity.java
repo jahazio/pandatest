@@ -23,20 +23,11 @@ public class MainActivity extends AppCompatActivity {
         //transition from splash screen to main screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent homeIntent = new Intent(MainActivity.this, mainScreen.class);
-                startActivity(homeIntent);
-                finish();
-            }
-        },SPLASH_TIME_OUT);
-
 
         //gets current time and date
-        TextView datetime = findViewById(R.id.dateTxt);
-        Date timenow = Calendar.getInstance().getTime();
-        datetime.setText(timenow.toString());
+        //TextView datetime = findViewById(R.id.dateTxt);
+        //Date timenow = Calendar.getInstance().getTime();
+        //datetime.setText(timenow.toString());
 
 
         //if ATM on map is clicked, goes to login screen
@@ -53,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         atm2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
+        //Breaks here after r.layout.mainactivity is used
         //if login is clicked in login screen
         Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -195,8 +189,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
+        */
     }
 
 
