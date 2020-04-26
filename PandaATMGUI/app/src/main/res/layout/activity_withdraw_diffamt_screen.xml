@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/clearButton4"
+        android:id="@+id/clearButton5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/withdrawAmt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
@@ -82,7 +82,7 @@
         android:textColor="#111111"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/clearButton3" />
+        app:layout_constraintStart_toEndOf="@+id/clearButton5" />
 
     <ImageView
         android:id="@+id/logo5"

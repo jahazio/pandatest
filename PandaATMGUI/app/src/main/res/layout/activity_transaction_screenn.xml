@@ -142,7 +142,7 @@
         app:layout_constraintTop_toBottomOf="@+id/acctNum" />
 
     <Button
-        android:id="@+id/cancelBtn1"
+        android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="108dp"

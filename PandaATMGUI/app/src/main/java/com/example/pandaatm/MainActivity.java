@@ -1,5 +1,6 @@
 package com.example.pandaatm;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.pandaatm.ui.login.loginScreen;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -89,19 +92,78 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //if clear is clicked in login screen
-        Button clearButton = findViewById(R.id.clearButton4);
-        final EditText cardNum = findViewById(R.id.cardNumberText);
-        final EditText pinNum = findViewById(R.id.pinText);
-        final EditText cashDepositTxt = findViewById(R.id.editText);
-        clearButton.setOnClickListener(new View.OnClickListener() {
+        Button clearButton = findViewById(R.id.clearButton); //atm login clear
+        Button clearButton1 = findViewById(R.id.clearButton1); //balance screen clear
+        Button clearButton2 = findViewById(R.id.clearButton2); //cash deposit screen clear
+        Button clearButton3 = findViewById(R.id.clearButton3); //check deposit screen clear
+        Button clearButton4 = findViewById(R.id.clearButton4); //outside transfer screen clear
+        Button clearButton5 = findViewById(R.id.clearButton5); //withdraw different amt screen clear
+        Button cancelButton = findViewById(R.id.cancelButton); //transaction screen cancel
+        Button cancelButton1 = findViewById(R.id.cancelButton1); //withdraw screen cancel
+        clearButton.setOnClickListener((new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                EditText cardNum = findViewById(R.id.cardNumberText);
+                EditText pinNum = findViewById(R.id.pinText);
                 cardNum.getText().clear();
                 pinNum.getText().clear();
-                cashDepositTxt.getText().clear();
+            }
+        }
+
+                ));
+        clearButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText accType = findViewById(R.id.accountTypeTxt);
+                @SuppressLint("WrongViewCast") EditText balTxt = findViewById(R.id.balanceText);
+                accType.getText().clear();
+                balTxt.getText().clear();
             }
         });
-
+        clearButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText cashamt = findViewById(R.id.cashamt);
+                cashamt.getText().clear();
+            }
+        });
+        clearButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText checkamt = findViewById(R.id.checkamt);
+                checkamt.getText().clear();
+            }
+        });
+        clearButton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText acctNum = findViewById(R.id.acctNum);
+                EditText amtTrans = findViewById(R.id.amountTransfer);
+                acctNum.getText().clear();
+                amtTrans.getText().clear();
+            }
+        });
+        clearButton5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText withdrawAmt = findViewById(R.id.withdrawAmt);
+                withdrawAmt.getText().clear();
+            }
+        });
+        cancelButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, loginScreen.class);
+                startActivity(intent);
+            }
+        });
+        cancelButton1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, loginScreen.class);
+                startActivity(intent);
+            }
+        });
         //if back to map is clicked in login screen
         Button backMap = findViewById(R.id.backToMapButton);
         backMap.setOnClickListener(new View.OnClickListener() {
@@ -186,15 +248,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //if cancel button is clicked in transaction screen
-        Button cancelButton = findViewById(R.id.cancelBtn1);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, loginScreen.class);
-                startActivity(intent);
-            }
-        });
 
 
     }
