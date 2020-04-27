@@ -62,7 +62,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/enterButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#33CC33"
@@ -73,7 +73,7 @@
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/previous2"
         android:layout_width="128dp"
         android:layout_height="36dp"
         android:background="#FFFFFF"

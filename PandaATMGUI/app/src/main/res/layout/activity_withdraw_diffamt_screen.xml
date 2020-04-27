@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/clearButton5"
+        android:id="@+id/clearButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
@@ -48,16 +48,17 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="102dp"
+        android:layout_marginBottom="587dp"
         android:text="Enter amount to withdraw."
         android:textColor="#111111"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImage7"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/withdrawAmt"
@@ -72,17 +73,20 @@
         app:layout_constraintTop_toTopOf="@+id/backgroundImage7" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/enterButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="88dp"
         android:layout_marginBottom="44dp"
         android:background="#33CC33"
         android:text="Enter"
         android:textColor="#111111"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/clearButton5" />
+        app:layout_constraintHorizontal_bias="0.727"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="UnknownId" />
 
     <ImageView
         android:id="@+id/logo5"
