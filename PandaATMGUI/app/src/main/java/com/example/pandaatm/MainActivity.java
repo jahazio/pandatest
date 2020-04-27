@@ -11,12 +11,24 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.pandaatm.ui.login.loginScreen;
+
 import java.util.Calendar;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private static int SPLASH_TIME_OUT = 4000;
-
+    Intent main = new Intent(this, MainActivity.class);
+    Intent login = new Intent(this, loginScreen.class);
+    Intent trans = new Intent(this, transactionScreenn.class);
+    Intent cashDep = new Intent(this, cashDepositScreen.class);
+    Intent checkDep = new Intent(this, checkDepositScreen.class);
+    Intent depChoice = new Intent(this, depositChoiceScreen.class);
+    Intent withdraw = new Intent(this, withdrawScreen.class);
+    Intent withdrawDiff = new Intent(this, withdrawDifferentAmt.class);
+    Intent transferType = new Intent(this, transferType.class);
+    Intent outsideTransfer = new Intent(this, outsideTransfer.class);
+    Intent balance = new Intent(this, balanceScreen.class);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -30,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(homeIntent);
                 finish();
             }
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
 
 
         //gets current time and date
@@ -39,188 +51,165 @@ public class MainActivity extends AppCompatActivity {
         datetime.setText(timenow.toString());
 
 
-        //if ATM on map is clicked, goes to login screen
         ImageButton atm1Button = findViewById(R.id.bldg1ATM);
         ImageButton atm2Button = findViewById(R.id.bldg17ATM);
         ImageButton atm3Button = findViewById(R.id.mktplaceATM);
         ImageButton atm4Button = findViewById(R.id.bscATM);
         ImageButton atm5Button = findViewById(R.id.libATM);
-        final Intent intent = new Intent(MainActivity.this, loginScreen.class);
 
-        atm1Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
-        atm2Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
-        atm3Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
-        atm4Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
-        atm5Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(intent);
-            }
-        });
+        Button clearButton = findViewById(R.id.clearButton); //atm login clear
+        Button clearButton1 = findViewById(R.id.clearButton1); //cash deposit screen clear
+        Button clearButton2 = findViewById(R.id.clearButton2); //check deposit screen clear
+        Button clearButton3 = findViewById(R.id.clearButton3); //outside transfer screen clear
+        Button clearButton4 = findViewById(R.id.clearButton4); //withdraw different amt screen clear
+        Button cancelButton = findViewById(R.id.cancelButton); //transaction screen cancel
+        Button cancelButton1 = findViewById(R.id.cancelButton1); //withdraw screen cancel
+        Button cancelButton2 = findViewById(R.id.cancelButton2); //balance screen cancel
+        Button login = findViewById(R.id.loginButton);
 
-        //if login is clicked in login screen
-        Button loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, transactionScreenn.class);
-                startActivity(intent);
-            }
-        });
-
-        //if clear is clicked in login screen
-        Button clearButton = findViewById(R.id.clearButton4);
-        final EditText cardNum = findViewById(R.id.cardNumberText);
-        final EditText pinNum = findViewById(R.id.pinText);
-        final EditText cashDepositTxt = findViewById(R.id.editText);
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cardNum.getText().clear();
-                pinNum.getText().clear();
-                cashDepositTxt.getText().clear();
-            }
-        });
-
-        //if back to map is clicked in login screen
-        Button backMap = findViewById(R.id.backToMapButton);
-        backMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, mainScreen.class);
-                startActivity(intent);
-            }
-        });
-
-        //if deposit is clicked in transaction screen
-        Button depositButton = findViewById(R.id.depositBtn);
-        depositButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, depositChoiceScreen.class);
-                startActivity(intent);
-            }
-        });
-
-        //if cash deposit is clicked in deposit choice screen
+        Button depositBtn = findViewById(R.id.depositBtn); //DEPOSIT PATH
         Button cashDeposit = findViewById(R.id.cashDeposit);
-        cashDeposit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, cashDepositScreen.class);
-                startActivity(intent);
-            }
-        });
-
-        //if enter is clicked in cash deposit screen
-        Button enterCash = findViewById(R.id.button);
-        enterCash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, transactionScreenn.class);
-                startActivity(intent);
-            }
-        });
-
-        //if clear is clicked in cash deposit screen
-
-
-
-        //if check deposit is checked in deposit balance screen
         Button checkDeposit = findViewById(R.id.checkDeposit);
-        checkDeposit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, checkDepositScreen.class);
-                startActivity(intent);
-            }
-        });
+        Button enterButton = findViewById(R.id.enterButton);
+        Button enterButton1 = findViewById(R.id.enterButton1);
+        Button previous = findViewById(R.id.previous);
+        Button previous1 = findViewById(R.id.previous1);
 
-        //if withdraw is clicked in transaction screen
-        Button withdrawButton = findViewById(R.id.withdrawBtn);
-        withdrawButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, withdrawScreen.class);
-                startActivity(intent);
-            }
-        });
+        Button withdrawBtn = findViewById(R.id.withdrawBtn); //WITHDRAW PATH
+        Button diffAmt = findViewById(R.id.diffAmt);
+        Button enterButton2 = findViewById(R.id.enterButton2);
 
-        // if transfer is clicked in transaction screen
-        Button transferButton = findViewById(R.id.transferBtn);
-        transferButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, transferType.class);
-                startActivity(intent);
-            }
-        });
+        Button transferBtn = findViewById(R.id.transferBtn); //TRANSFER PATH
+        Button checkingAcct = findViewById(R.id.checkingAcct);
+        Button savingAcct = findViewById(R.id.savingAcct);
+        Button enterButton3 = findViewById(R.id.enterButton3);
+        Button previous2 = findViewById(R.id.previous2);
 
-        //if balance button is clicked in transaction screen
-        Button balanceButton = findViewById(R.id.balanceBtn);
-        balanceButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, balanceScreen.class);
-                startActivity(intent);
-            }
-        });
+        Button balanceBtn = findViewById(R.id.balanceBtn); //BALANCE PATH
+        Button continueButton = findViewById(R.id.continueButton);
 
-        //if cancel button is clicked in transaction screen
-        Button cancelButton = findViewById(R.id.cancelBtn1);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, loginScreen.class);
-                startActivity(intent);
-            }
-        });
+        atm1Button.setOnClickListener(this);
+        atm2Button.setOnClickListener(this);
+        atm3Button.setOnClickListener(this);
+        atm4Button.setOnClickListener(this);
+        atm5Button.setOnClickListener(this);
 
+        clearButton.setOnClickListener(this);
+        clearButton1.setOnClickListener(this);
+        clearButton2.setOnClickListener(this);
+        clearButton3.setOnClickListener(this);
+        clearButton4.setOnClickListener(this);
+        cancelButton.setOnClickListener(this);
+        cancelButton1.setOnClickListener(this);
+        cancelButton2.setOnClickListener(this);
 
+        login.setOnClickListener(this);
+
+        depositBtn.setOnClickListener(this);
+        cashDeposit.setOnClickListener(this);
+        checkDeposit.setOnClickListener(this);
+        enterButton.setOnClickListener(this);
+        enterButton1.setOnClickListener(this);
+        previous.setOnClickListener(this);
+        previous1.setOnClickListener(this);
+
+        withdrawBtn.setOnClickListener(this);
+        diffAmt.setOnClickListener(this);
+        enterButton2.setOnClickListener(this);
+
+        transferBtn.setOnClickListener(this);
+        checkingAcct.setOnClickListener(this);
+        savingAcct.setOnClickListener(this);
+        enterButton3.setOnClickListener(this);
+        previous2.setOnClickListener(this);
+
+        balanceBtn.setOnClickListener(this);
+        continueButton.setOnClickListener(this);
     }
 
 
-
-
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.bldg1ATM: //if ATM on map is clicked, goes to login screen
+            case R.id.bldg17ATM:
+            case R.id.mktplaceATM:
+            case R.id.bscATM:
+            case R.id.libATM:
+                startActivity(login);
+                break;
+            case R.id.clearButton:
+                EditText cardNum = findViewById(R.id.cardNumberText);
+                EditText pinNum = findViewById(R.id.pinText);
+                cardNum.getText().clear();
+                pinNum.getText().clear();
+                break;
+            case R.id.clearButton1:
+                EditText cashamt = findViewById(R.id.cashamt);
+                cashamt.getText().clear();
+                break;
+            case R.id.clearButton2:
+                EditText checkamt = findViewById(R.id.checkamt);
+                checkamt.getText().clear();
+                break;
+            case R.id.clearButton3:
+                EditText acctNum = findViewById(R.id.acctNum);
+                EditText amtTrans = findViewById(R.id.amountTransfer);
+                acctNum.getText().clear();
+                amtTrans.getText().clear();
+                break;
+            case R.id.clearButton4:
+                EditText withdrawAmt = findViewById(R.id.withdrawAmt);
+                withdrawAmt.getText().clear();
+                break;
+            case R.id.cancelButton: //if cancel is clicked
+            case R.id.cancelButton1:
+            case R.id.cancelButton2:
+                startActivity(main);
+                break;
+            case R.id.loginButton: //if login is clicked
+            case R.id.continueButton:
+                startActivity(trans);
+                break;
+            case R.id.cashDeposit: //if cash is clicked
+                startActivity(cashDep);
+                break;
+            case R.id.checkDeposit: //if check is clicked
+                startActivity(checkDep);
+                break;
+            case R.id.previous: //if previous dep choice is clicked
+            case R.id.previous1:
+                startActivity(depChoice);
+                break;
+            case R.id.enterButton:
+                // TBD CASH DEPOSIT ENTERED
+                break;
+            case R.id.enterButton1:
+                // TBD CHECK DEPOSIT ENTERED
+                break;
+            case R.id.withdrawBtn:
+                startActivity(withdraw);
+                break;
+            case R.id.diffAmt:
+                startActivity(withdrawDiff);
+                break;
+            case R.id.enterButton2:
+                // TBD DIFF WITHDRAW AMOUNT ENTERED
+                break;
+            case R.id.transferBtn:
+            case R.id.previous2:
+                startActivity(transferType);
+                break;
+            case R.id.checkingAcct:
+            case R.id.savingAcct:
+                startActivity(outsideTransfer);
+                break;
+            case R.id.enterButton3:
+                // TBD OUTSIDE TRANSFER ENTERED
+                break;
+            case R.id.depositBtn:
+                startActivity(balance);
+                break;
+        }
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

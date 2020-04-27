@@ -7,6 +7,21 @@
     android:layout_height="match_parent"
     tools:context=".withdrawScreen">
 
+    <Button
+        android:id="@+id/cancelButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:background="#B12525"
+        android:text="Cancel"
+        android:textColor="#111111"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.605" />
+
     <ImageView
         android:id="@+id/backgroundImage8"
         android:layout_width="0dp"
@@ -38,8 +53,7 @@
         app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/logo"
-        app:srcCompat="@drawable/mutant_bamboo"
-        />
+        app:srcCompat="@drawable/mutant_bamboo" />
 
     <Button
         android:id="@+id/twohundredbutton"
@@ -149,7 +163,7 @@
         tools:ignore="HardcodedText" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/diffAmt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="456dp"

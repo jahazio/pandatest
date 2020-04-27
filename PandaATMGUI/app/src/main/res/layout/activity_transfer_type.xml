@@ -50,7 +50,7 @@
         app:srcCompat="@drawable/mutant_bamboo" />
 
     <Button
-        android:id="@+id/checkingAcct2"
+        android:id="@+id/savingAcct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="58dp"
@@ -79,10 +79,17 @@
         android:id="@+id/checkingAcct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="98dp"
+        android:layout_marginTop="257dp"
+        android:layout_marginEnd="225dp"
+        android:layout_marginBottom="426dp"
         android:background="#33CC33"
         android:text="Checking"
         android:textColor="#111111"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkingAcct2"
-        app:layout_constraintStart_toStartOf="@+id/textView3" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UnknownId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
